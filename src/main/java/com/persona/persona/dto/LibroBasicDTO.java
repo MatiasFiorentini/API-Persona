@@ -4,16 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
-public class LibroDTO {
+public class LibroBasicDTO {
 
     private Long id;
     private String titulo;
     private LocalDate fecha;
     private String genero;
     private int numPaginas;
-    private List<AutorDTO> autores;
 }

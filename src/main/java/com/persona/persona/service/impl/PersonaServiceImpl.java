@@ -9,6 +9,7 @@ import com.persona.persona.repository.PersonaRespository;
 import com.persona.persona.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,7 @@ public class PersonaServiceImpl implements PersonaService {
 
 
     @Override
+    @Transactional
     public PersonaDTO save(PersonaDTO personaDTO) {
         Persona persona = personaMapper.personaDTO2Persona(personaDTO);
         Persona personaSaved = personaRespository.save(persona);
@@ -32,6 +34,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PersonaDTO> getAllPersona() {
         List<Persona> personaList = personaRespository.findAll();
         List<PersonaDTO> result = personaMapper.personaList2PersonaDTOList(personaList);
@@ -39,6 +42,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    @Transactional
     public boolean delete(Long id) {
         if (personaRespository.existsById(id)){
             personaRespository.deleteById(id);
@@ -49,6 +53,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    @Transactional
     public PersonaDTO update(Long id, PersonaDTO personaDTO) {
         Optional<Persona> respuesta = personaRespository.findById(id);
         if (!respuesta.isPresent()){
@@ -61,6 +66,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PersonaBasicDTO> getBasicPersona() {
         List<Persona> personaList = personaRespository.findAll();
         List<PersonaBasicDTO> result = personaMapper.personaList2BasicDTOList(personaList);
