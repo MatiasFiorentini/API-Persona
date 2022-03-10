@@ -2,6 +2,7 @@ package com.persona.persona.service.impl;
 
 import com.persona.persona.dto.PersonaBasicDTO;
 import com.persona.persona.dto.PersonaDTO;
+import com.persona.persona.dto.PersonaNombreDTO;
 import com.persona.persona.entity.Persona;
 import com.persona.persona.exception.ParamNotFound;
 import com.persona.persona.mapper.PersonaMapper;
@@ -70,6 +71,14 @@ public class PersonaServiceImpl implements PersonaService {
     public List<PersonaBasicDTO> getBasicPersona() {
         List<Persona> personaList = personaRespository.findAll();
         List<PersonaBasicDTO> result = personaMapper.personaList2BasicDTOList(personaList);
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PersonaNombreDTO> search(String nombre) {
+        List<Persona> personaList = personaRespository.search(nombre);
+        List<PersonaNombreDTO> result = personaMapper.personaList2NombreDTOList(personaList);
         return result;
     }
 }

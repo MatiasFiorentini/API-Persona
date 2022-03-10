@@ -1,8 +1,12 @@
 package com.persona.persona.mapper;
 
+import com.persona.persona.dto.LibroDTO;
 import com.persona.persona.dto.PersonaBasicDTO;
 import com.persona.persona.dto.PersonaDTO;
+import com.persona.persona.dto.PersonaNombreDTO;
+import com.persona.persona.entity.Libro;
 import com.persona.persona.entity.Persona;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,12 +15,18 @@ import java.util.List;
 @Component
 public class PersonaMapper {
 
+    @Autowired
+    LibroMapper libroMapper;
+
     public Persona personaDTO2Persona(PersonaDTO personaDTO){
         Persona persona = new Persona();
         persona.setNombre(personaDTO.getNombre());
         persona.setApellido(personaDTO.getApellido());
         persona.setDni(personaDTO.getDni());
         persona.setDomicilio(personaDTO.getDomicilio());
+
+        List<Libro> libroList = libroMapper.libroDTOList2LibroList(personaDTO.getLibros());
+        persona.setLibros(libroList);
 
         return persona;
     }
@@ -28,6 +38,9 @@ public class PersonaMapper {
         dto.setApellido(persona.getApellido());
         dto.setDni(persona.getDni());
         dto.setDomicilio(persona.getDomicilio());
+
+        List<LibroDTO> libroDTO = libroMapper.libroList2LibroDTOList(persona.getLibros(),true);
+        dto.setLibros(libroDTO);
 
         return dto;
     }
@@ -56,6 +69,18 @@ public class PersonaMapper {
             basicDTO.setApellido(persona.getApellido());
             basicDTO.setDni(persona.getDni());
             dtos.add(basicDTO);
+        }
+        return dtos;
+    }
+
+    public List<PersonaNombreDTO> personaList2NombreDTOList(List<Persona> personaList){
+        List<PersonaNombreDTO> dtos = new ArrayList<>();
+        PersonaNombreDTO nombreDTO;
+        for (Persona persona: personaList) {
+            nombreDTO = new PersonaNombreDTO();
+            nombreDTO.setId(persona.getId());
+            nombreDTO.setNombre(persona.getNombre());
+            dtos.add(nombreDTO);
         }
         return dtos;
     }

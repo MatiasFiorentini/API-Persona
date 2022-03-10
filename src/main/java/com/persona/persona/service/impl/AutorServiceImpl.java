@@ -28,7 +28,7 @@ public class AutorServiceImpl implements AutorService {
     public AutorDTO save(AutorDTO autorDTO){
         Autor autor = autorMapper.autorDTO2Autor(autorDTO);
         Autor autorSaved = autorRepository.save(autor);
-        AutorDTO result = autorMapper.autor2DTO(autorSaved);
+        AutorDTO result = autorMapper.autor2DTO(autorSaved,false);
         return result;
     }
 
@@ -36,7 +36,7 @@ public class AutorServiceImpl implements AutorService {
     @Transactional(readOnly = true)
     public List<AutorDTO> getAllAutor(){
         List<Autor> autorList = autorRepository.findAll();
-        List<AutorDTO> result = autorMapper.autorList2AutorDTOList(autorList);
+        List<AutorDTO> result = autorMapper.autorList2AutorDTOList(autorList,true);
         return result;
     }
 
@@ -60,7 +60,7 @@ public class AutorServiceImpl implements AutorService {
         }
         autorMapper.autorRefreshValue(respuesta.get(),autorDTO);
         Autor autorSaved = autorRepository.save(respuesta.get());
-        AutorDTO result = autorMapper.autor2DTO(autorSaved);
+        AutorDTO result = autorMapper.autor2DTO(autorSaved,false);
         return result;
     }
 

@@ -29,7 +29,7 @@ public class LibroServiceImpl implements LibroService {
     public LibroDTO save(LibroDTO libroDTO) {
         Libro libro = libroMapper.libroDTO2Libro(libroDTO);
         Libro libroSaved = libroRepository.save(libro);
-        LibroDTO result = libroMapper.libro2DTO(libroSaved);
+        LibroDTO result = libroMapper.libro2DTO(libroSaved,true);
         return result;
     }
 
@@ -37,7 +37,7 @@ public class LibroServiceImpl implements LibroService {
     @Transactional(readOnly = true)
     public List<LibroDTO> getAllLibro() {
         List<Libro> libroList = libroRepository.findAll();
-        List<LibroDTO> result = libroMapper.libroList2LibroDTOList(libroList);
+        List<LibroDTO> result = libroMapper.libroList2LibroDTOList(libroList,true);
         return result;
     }
 
@@ -61,7 +61,7 @@ public class LibroServiceImpl implements LibroService {
         }
         libroMapper.libroRefreshValue(respuesta.get(),libroDTO);
         Libro libroSaved = libroRepository.save(respuesta.get());
-        LibroDTO result = libroMapper.libro2DTO(libroSaved);
+        LibroDTO result = libroMapper.libro2DTO(libroSaved,false);
         return result;
     }
 

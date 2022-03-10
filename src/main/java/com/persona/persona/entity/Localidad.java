@@ -15,8 +15,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Setter
 @Getter
-@SQLDelete(sql = "UPDATE localidad SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
 public class Localidad {
 
     @Id
@@ -25,5 +23,5 @@ public class Localidad {
 
     private String denominación;
 
-    private boolean deleted = Boolean.FALSE;
+
 }

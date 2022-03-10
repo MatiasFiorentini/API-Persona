@@ -2,6 +2,7 @@ package com.persona.persona.controller;
 
 import com.persona.persona.dto.PersonaBasicDTO;
 import com.persona.persona.dto.PersonaDTO;
+import com.persona.persona.dto.PersonaNombreDTO;
 import com.persona.persona.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,6 +46,12 @@ public class PersonaController {
     public ResponseEntity<List<PersonaBasicDTO>> getBasicPersona(){
         List<PersonaBasicDTO> personaBasicDTO = personaService.getBasicPersona();
         return ResponseEntity.ok().body(personaBasicDTO);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<PersonaNombreDTO>> search(String nombre){
+        List<PersonaNombreDTO> personaNombreDTOList = personaService.search(nombre);
+        return ResponseEntity.ok().body(personaNombreDTOList);
     }
 
 }
