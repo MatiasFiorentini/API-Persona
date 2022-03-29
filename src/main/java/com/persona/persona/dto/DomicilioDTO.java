@@ -4,8 +4,6 @@ import com.persona.persona.entity.Localidad;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 public class DomicilioDTO {

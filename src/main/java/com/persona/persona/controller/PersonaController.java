@@ -20,14 +20,12 @@ public class PersonaController {
 
     @PostMapping
     public ResponseEntity<PersonaDTO> save(@RequestBody PersonaDTO personaDTO){
-        PersonaDTO personaSaved = personaService.save(personaDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(personaSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(personaService.save(personaDTO));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<PersonaDTO>> getAll(){
-        List<PersonaDTO> personaList = personaService.getAllPersona();
-        return ResponseEntity.ok().body(personaList);
+        return ResponseEntity.ok().body(personaService.getAllPersona());
     }
 
     @DeleteMapping("/{id}")
@@ -38,20 +36,22 @@ public class PersonaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<PersonaDTO> update(@PathVariable Long id,@RequestBody PersonaDTO personaDTO){
-        PersonaDTO personaUpdate = personaService.update(id,personaDTO);
-        return ResponseEntity.ok().body(personaUpdate);
+        return ResponseEntity.ok().body(personaService.update(id,personaDTO));
     }
 
     @GetMapping("/basic")
     public ResponseEntity<List<PersonaBasicDTO>> getBasicPersona(){
-        List<PersonaBasicDTO> personaBasicDTO = personaService.getBasicPersona();
-        return ResponseEntity.ok().body(personaBasicDTO);
+        return ResponseEntity.ok().body(personaService.getBasicPersona());
     }
 
     @GetMapping("/search")
     public ResponseEntity<List<PersonaNombreDTO>> search(String nombre){
-        List<PersonaNombreDTO> personaNombreDTOList = personaService.search(nombre);
-        return ResponseEntity.ok().body(personaNombreDTOList);
+        return ResponseEntity.ok().body(personaService.search(nombre));
+    }
+
+    @GetMapping("/search2")
+    public ResponseEntity<List<PersonaNombreDTO>> search2(String nombre){
+        return ResponseEntity.ok().body(personaService.search(nombre));
     }
 
 }

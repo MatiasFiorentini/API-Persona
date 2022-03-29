@@ -19,14 +19,12 @@ public class AutorController {
 
     @PostMapping
     public ResponseEntity<AutorDTO> save(@RequestBody AutorDTO autorDTO){
-        AutorDTO autorSaved = autorService.save(autorDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(autorSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(autorService.save(autorDTO));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<AutorDTO>> getAll(){
-        List<AutorDTO> autorList = autorService.getAllAutor();
-        return ResponseEntity.ok().body(autorList);
+        return ResponseEntity.ok().body(autorService.getAllAutor());
     }
 
     @DeleteMapping("/{id}")
@@ -37,14 +35,12 @@ public class AutorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<AutorDTO> update(@PathVariable Long id,@RequestBody AutorDTO autorDTO){
-        AutorDTO autorUpdate = autorService.update(id,autorDTO);
-        return ResponseEntity.ok().body(autorUpdate);
+        return ResponseEntity.ok().body(autorService.update(id,autorDTO));
     }
 
     @GetMapping("/basic")
     public ResponseEntity<List<AutorBasicDTO>> getBasicAutor(){
-        List<AutorBasicDTO> autorBasicDTO = autorService.getBasicAutor();
-        return ResponseEntity.ok().body(autorBasicDTO);
+        return ResponseEntity.ok().body(autorService.getBasicAutor());
     }
 
 }

@@ -19,14 +19,12 @@ public class DomicilioController {
 
     @PostMapping
     public ResponseEntity<DomicilioDTO> save(@RequestBody DomicilioDTO domicilioDTO){
-        DomicilioDTO domicilioSaved = domicilioService.save(domicilioDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(domicilioSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(domicilioService.save(domicilioDTO));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<DomicilioDTO>> getAll(){
-        List<DomicilioDTO> domicilioList = domicilioService.getAllDomicilio();
-        return ResponseEntity.ok().body(domicilioList);
+        return ResponseEntity.ok().body(domicilioService.getAllDomicilio());
     }
 
     @DeleteMapping("/{id}")
@@ -37,14 +35,12 @@ public class DomicilioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<DomicilioDTO> update(@PathVariable Long id,@RequestBody DomicilioDTO domicilioDTO){
-        DomicilioDTO domicilioUpdate = domicilioService.update(id,domicilioDTO);
-        return ResponseEntity.ok().body(domicilioUpdate);
+        return ResponseEntity.ok().body(domicilioService.update(id,domicilioDTO));
     }
 
     @GetMapping("/basic")
     public ResponseEntity<List<DomicilioBasicDTO>> getBasicDomicilio(){
-        List<DomicilioBasicDTO> domicilioBasicDTO = domicilioService.getBasicDomicilio();
-        return ResponseEntity.ok().body(domicilioBasicDTO);
+        return ResponseEntity.ok().body(domicilioService.getBasicDomicilio());
     }
 
 }

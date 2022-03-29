@@ -10,7 +10,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "localidad")
+@Table(name = "LOCALIDADES")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -21,6 +21,7 @@ public class Localidad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "DENOMINACION")
     private String denominación;
 
 

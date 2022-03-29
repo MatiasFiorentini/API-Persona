@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "autor")
+@Table(name = "AUTORES")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -25,10 +25,13 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "NOMBRE")
     private String nombre;
+
+    @Column(name = "APELLIDO")
     private String apellido;
 
-    @Column(length = 1500)
+    @Column(length = 1500, name = "BIOGRAFIA")
     private String biografia;
 
     @ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL)

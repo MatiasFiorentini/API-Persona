@@ -10,7 +10,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "domicilio")
+@Table(name = "DOMICILIOS")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -23,7 +23,10 @@ public class Domicilio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "CALLE")
     private String calle;
+
+    @Column(name = "NUMERO")
     private Integer numero;
 
     @ManyToOne(optional = false) //domicilio si o si tiene q tener una localidad

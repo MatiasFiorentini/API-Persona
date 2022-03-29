@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "persona")
+@Table(name = "PERSONAS")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -25,8 +25,13 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "NOMBRE")
     private String nombre;
+
+    @Column(name = "APELLIDO")
     private String apellido;
+
+    @Column(name = "DNI")
     private int dni;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -20,4 +20,6 @@ public interface PersonaService {
 
     List<PersonaNombreDTO> search(String nombre);
 
+    List<PersonaNombreDTO> search2(String nombre);
+
 }

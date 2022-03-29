@@ -6,7 +6,7 @@ import com.persona.persona.dto.PersonaNombreDTO;
 import com.persona.persona.entity.Persona;
 import com.persona.persona.exception.ParamNotFound;
 import com.persona.persona.mapper.PersonaMapper;
-import com.persona.persona.repository.PersonaRespository;
+import com.persona.persona.repository.IPersonaRepository;
 import com.persona.persona.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class PersonaServiceImpl implements PersonaService {
 
     @Autowired
-    private PersonaRespository personaRespository;
+    private IPersonaRepository IPersonaRespository;
 
     @Autowired
     private PersonaMapper personaMapper;
@@ -29,7 +29,7 @@ public class PersonaServiceImpl implements PersonaService {
     @Transactional
     public PersonaDTO save(PersonaDTO personaDTO) {
         Persona persona = personaMapper.personaDTO2Persona(personaDTO);
-        Persona personaSaved = personaRespository.save(persona);
+        Persona personaSaved = IPersonaRespository.save(persona);
         PersonaDTO result = personaMapper.persona2DTO(personaSaved);
         return result;
     }
@@ -37,7 +37,7 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     @Transactional(readOnly = true)
     public List<PersonaDTO> getAllPersona() {
-        List<Persona> personaList = personaRespository.findAll();
+        List<Persona> personaList = IPersonaRespository.findAll();
         List<PersonaDTO> result = personaMapper.personaList2PersonaDTOList(personaList);
         return result;
     }
@@ -45,8 +45,8 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     @Transactional
     public boolean delete(Long id) {
-        if (personaRespository.existsById(id)){
-            personaRespository.deleteById(id);
+        if (IPersonaRespository.existsById(id)){
+            IPersonaRespository.deleteById(id);
             return true;
         }else{
             return false;
@@ -56,12 +56,12 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     @Transactional
     public PersonaDTO update(Long id, PersonaDTO personaDTO) {
-        Optional<Persona> respuesta = personaRespository.findById(id);
+        Optional<Persona> respuesta = IPersonaRespository.findById(id);
         if (!respuesta.isPresent()){
             throw new ParamNotFound("Id de persona no válido");
         }
         personaMapper.personaRefreshValues(respuesta.get(),personaDTO);
-        Persona personaSaved = personaRespository.save(respuesta.get());
+        Persona personaSaved = IPersonaRespository.save(respuesta.get());
         PersonaDTO result = personaMapper.persona2DTO(personaSaved);
         return result;
     }
@@ -69,7 +69,7 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     @Transactional(readOnly = true)
     public List<PersonaBasicDTO> getBasicPersona() {
-        List<Persona> personaList = personaRespository.findAll();
+        List<Persona> personaList = IPersonaRespository.findAll();
         List<PersonaBasicDTO> result = personaMapper.personaList2BasicDTOList(personaList);
         return result;
     }
@@ -77,7 +77,14 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     @Transactional(readOnly = true)
     public List<PersonaNombreDTO> search(String nombre) {
-        List<Persona> personaList = personaRespository.search(nombre);
+        List<Persona> personaList = IPersonaRespository.search(nombre);
+        List<PersonaNombreDTO> result = personaMapper.personaList2NombreDTOList(personaList);
+        return result;
+    }
+
+    @Override
+    public List<PersonaNombreDTO> search2(String nombre) {
+        List<Persona> personaList = IPersonaRespository.findByNombre(nombre);
         List<PersonaNombreDTO> result = personaMapper.personaList2NombreDTOList(personaList);
         return result;
     }

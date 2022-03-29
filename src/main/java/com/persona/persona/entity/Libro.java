@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "libro")
+@Table(name = "LIBROS")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -27,14 +27,17 @@ public class Libro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "TITULO")
     private String titulo;
 
     @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @Column(name = "FECHA")
     private LocalDate fecha;
 
+    @Column(name = "GENERO")
     private String genero;
 
-    @Column(name = "numero_paginas")
+    @Column(name = "NUMERO_PAGINAS")
     private int numPaginas;
 
     @ManyToMany(

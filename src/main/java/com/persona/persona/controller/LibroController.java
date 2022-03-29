@@ -19,14 +19,12 @@ public class LibroController {
 
     @PostMapping
     public ResponseEntity<LibroDTO> save(@RequestBody LibroDTO libroDTO){
-        LibroDTO libroSaved = libroService.save(libroDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(libroSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(libroService.save(libroDTO));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<LibroDTO>> getAll(){
-        List<LibroDTO> libroList = libroService.getAllLibro();
-        return ResponseEntity.ok().body(libroList);
+        return ResponseEntity.ok().body(libroService.getAllLibro());
     }
 
     @DeleteMapping("/{id}")
@@ -37,14 +35,12 @@ public class LibroController {
 
     @PutMapping("/{id}")
     public ResponseEntity<LibroDTO> update(@PathVariable Long id,@RequestBody LibroDTO libroDTO){
-        LibroDTO libroUpdate = libroService.update(id,libroDTO);
-        return ResponseEntity.ok().body(libroUpdate);
+        return ResponseEntity.ok().body(libroService.update(id,libroDTO));
     }
 
     @GetMapping("/basic")
     public ResponseEntity<List<LibroBasicDTO>> getBasicLibro(){
-        List<LibroBasicDTO> libroBasicDTO = libroService.getBasicLibro();
-        return ResponseEntity.ok().body(libroBasicDTO);
+        return ResponseEntity.ok().body(libroService.getBasicLibro());
     }
 
 }

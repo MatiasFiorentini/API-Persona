@@ -18,14 +18,12 @@ public class LocalidadController {
 
     @PostMapping
     public ResponseEntity<LocalidadDTO> save(@RequestBody LocalidadDTO localidadDTO){
-        LocalidadDTO localidadSaved = localidadService.save(localidadDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(localidadSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(localidadService.save(localidadDTO));
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<LocalidadDTO>> getAll(){
-        List<LocalidadDTO> localidadList = localidadService.getAllLocalidad();
-        return ResponseEntity.ok().body(localidadList);
+        return ResponseEntity.ok().body(localidadService.getAllLocalidad());
     }
 
     @DeleteMapping("/{id}")
@@ -36,8 +34,7 @@ public class LocalidadController {
 
     @PutMapping("/{id}")
     public ResponseEntity<LocalidadDTO> update(@PathVariable Long id,@RequestBody LocalidadDTO localidadDTO){
-        LocalidadDTO localidadUpdate = localidadService.update(id,localidadDTO);
-        return ResponseEntity.ok().body(localidadUpdate);
+        return ResponseEntity.ok().body(localidadService.update(id,localidadDTO));
     }
 
 }
